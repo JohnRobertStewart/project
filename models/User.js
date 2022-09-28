@@ -5,6 +5,8 @@ const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
   password: String,
+  pic: {type: String, require: true, default: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg", },
+  isAdmin:{ type: Boolean, require: true, default: false}
 });
 
 // Password hash middleware.
@@ -29,7 +31,6 @@ UserSchema.pre("save", function save(next) {
 });
 
 // Helper method for validating user's password.
-
 UserSchema.methods.comparePassword = function comparePassword(
   candidatePassword,
   cb
