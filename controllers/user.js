@@ -1,6 +1,6 @@
+const { ReturnDocument, ObjectId } = require("mongodb");
 const cloudinary = require("../middleware/cloudinary");
 const User = require("../models/User");
-const { findByIdAndUpdate } = require("../models/User");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -12,18 +12,16 @@ module.exports = {
     }
   },
 
-  updateProfile: async (req, res) => {
+  updateAvatar: async (req, res) => {
     try {
-      // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
-      await findByIdAndUpdate({
-
-      });
-      console.log("Profile pic has been updated!");
+    await User.findOneAndReplace({ _id: User.pic }); 
+    await cloudinary.uploader.findOneAndReplace(post.cloudinaryId);
+      console.log("Avatar has been updated!");
       res.redirect("/profile");
     } catch (err) {
       console.log(err);
     }
   },
 };
+
 

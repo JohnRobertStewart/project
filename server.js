@@ -9,6 +9,8 @@ const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
+const userRoutes = require("./routes/user");
+
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -44,10 +46,7 @@ app.use(
   })
 );
 
-//app.use(session({
- // secret: 'foo',
- // store: MongoStore.create(options)
-//}));
+
 
 // Passport middleware
 app.use(passport.initialize());
@@ -58,8 +57,8 @@ app.use(flash());
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
-//app.use("/post", postRoutes);
-//app.use("/comment", commentRoutes);
+app.use("/", userRoutes);
+
 
 //Server Running
 app.listen(process.env.PORT, () => {
