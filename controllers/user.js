@@ -14,9 +14,11 @@ module.exports = {
 
   updateAvatar: async (req, res) => {
     try {
-    await User.findOneAndReplace({ _id: User.pic }); 
-    await cloudinary.uploader.findOneAndReplace(post.cloudinaryId);
-      console.log("Avatar has been updated!");
+    await User.findByIdAndUpdate(
+      {pic: req.params.pic},     
+      {$inc: { pic: cloudinary.uploader(req.file.path)}}
+    );
+
       res.redirect("/profile");
     } catch (err) {
       console.log(err);
