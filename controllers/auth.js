@@ -1,6 +1,8 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
+const cloudinary = require("../middleware/cloudinary");
+
 
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -65,7 +67,8 @@ exports.getSignup = (req, res) => {
   });
 };
 
-exports.postSignup = (req, res, next) => {
+exports.postSignup = async (req, res, next) => {
+  try {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
     validationErrors.push({ msg: "Please enter a valid email address." });
@@ -83,12 +86,19 @@ exports.postSignup = (req, res, next) => {
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
   });
-
+ 
+    // Upload image to cloudinary
+  const result = await cloudinary.uploader.upload(req.file.path);
   const user = new User({
     userName: req.body.userName,
     email: req.body.email,
     password: req.body.password,
+    pic: result.secure_url,
+    cloudinaryId: result.public_id,
+    isAdmin: false,
+  
   });
+
 
   User.findOne(
     { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
@@ -115,4 +125,7 @@ exports.postSignup = (req, res, next) => {
       });
     }
   );
+} catch (err) {
+  console.log(err);
+}
 };

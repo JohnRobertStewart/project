@@ -1,17 +1,14 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
+const { none } = require("../middleware/multer");
 
 const UserSchema = new mongoose.Schema({
   userName: { type: String, unique: true },
   email: { type: String, unique: true },
   password: String,
-  pic: {type: String, require: true, default: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg", },
+  pic: {type: String, require: true },
   cloudinaryId: {type : String, require: true,},
   isAdmin:{ type: Boolean, require: true, default: false},
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
 });
 
 

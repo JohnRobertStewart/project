@@ -12,6 +12,7 @@ const mainRoutes = require("./routes/main");
 const userRoutes = require("./routes/user");
 const { options } = require("./routes/main");
 
+
 //Connect To Database
 connectDB();
 
@@ -36,7 +37,8 @@ require("./config/passport")(passport);
 app.set("view engine", "ejs");
 
 //Static Folder
-app.use(express.static("public"));
+const path = require("path");
+app.use(express.static(path.join(__dirname + "public")));
 
 //Body Parsing
 app.use(express.urlencoded({ extended: true }));
@@ -59,7 +61,7 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/", userRoutes);
-
+app.use("/user", userRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {

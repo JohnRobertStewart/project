@@ -1,27 +1,29 @@
-const { ReturnDocument, ObjectId } = require("mongodb");
 const cloudinary = require("../middleware/cloudinary");
 const User = require("../models/User");
 
-module.exports = {
+module.exports =  {
   getProfile: async (req, res) => {
-    try {  
-      const profile = await User.find({ user: req.user.id})    
-      res.render("profile.ejs", {profiles: profile, user: req.user});
+    try {     
+      const user = await User.findById(req.params.id);
+      res.render("profile.ejs", {user: req.user, pic: req.user.pic});
     } catch (err) {
       console.log(err);
     }
   },
 
+
   updateAvatar: async (req, res) => {
     try {
-    await User.findByIdAndUpdate(
-      {pic: req.params.pic},     
-      {$inc: { pic: cloudinary.uploader(req.file.path)}}
-    );
-
-      res.redirect("/profile");
+    const user = await User.findById({_id: req.params.id});
+    await cloudinary.uploader.destroy(pic.cloudinaryId);
+    const result = await cloudinary.uploader.upload(req.file.path);
+    await User.findByIdAndUpdate(user,  {
+      pic: {result}
+       });
+    
+    res.redirect("/profile");
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   },
 };
