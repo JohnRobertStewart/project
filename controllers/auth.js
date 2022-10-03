@@ -2,14 +2,17 @@ const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
 const cloudinary = require("../middleware/cloudinary");
+const user = require("./user");
 
 
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect("/profile");
+    user.loggedIn = true;   
+    return  res.redirect("/profile");
+    
   }
   res.render("login", {
-    title: "Login",
+  title: "Login",
   });
 };
 
@@ -25,7 +28,7 @@ exports.postLogin = (req, res, next) => {
     return res.redirect("/login");
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
-    gmail_remove_dots: false,
+  gmail_remove_dots: false,
   });
 
   passport.authenticate("local", (err, user, info) => {
@@ -40,6 +43,7 @@ exports.postLogin = (req, res, next) => {
       if (err) {
         return next(err);
       }
+      user.loggedIn = true;
       req.flash("success", { msg: "Success! You are logged in." });
       res.redirect(req.session.returnTo || "/profile");
     });
@@ -54,6 +58,7 @@ exports.logout = (req, res) => {
     if (err)
       console.log("Error : Failed to destroy the session during logout.", err);
     req.user = null;
+    user.loggedIn = false;
     res.redirect("/");
   });
 };
@@ -72,9 +77,9 @@ exports.postSignup = async (req, res, next) => {
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
     validationErrors.push({ msg: "Please enter a valid email address." });
-  if (!validator.isLength(req.body.password, { min: 8 }))
+  if (!validator.isLength(req.body.password, { min: 6 }))
     validationErrors.push({
-      msg: "Password must be at least 8 characters long",
+      msg: "Password must be at least 6 characters long",
     });
   if (req.body.password !== req.body.confirmPassword)
     validationErrors.push({ msg: "Passwords do not match" });
@@ -96,9 +101,10 @@ exports.postSignup = async (req, res, next) => {
     pic: result.secure_url,
     cloudinaryId: result.public_id,
     isAdmin: false,
-  
+    loggedIn: false,
+    
   });
-
+ 
 
   User.findOne(
     { $or: [{ email: req.body.email }, { userName: req.body.userName }] },

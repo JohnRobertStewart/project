@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
   pic: {type: String, require: true },
   cloudinaryId: {type : String, require: true,},
   isAdmin:{ type: Boolean, require: true, default: false},
+  loggedIn: {type: Boolean, require: true, default: false },
 });
 
 

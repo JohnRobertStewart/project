@@ -8,10 +8,8 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 router.get("/profile", ensureAuth, userController.getProfile);
 
-router.get("/:id", ensureAuth, userController.getProfile);
+router.post("/user/changeName", ensureAuth, userController.changeName);
 
-router.get("/user", ensureAuth, userController.getProfile );
-
-router.put("/updateAvatar", upload.single("file"), userController.updateAvatar);
+router.put("/updateAvatar", ensureAuth, upload.single("file"), userController.updateAvatar);
 
 module.exports = router;

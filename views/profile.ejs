@@ -3,24 +3,42 @@
   <div class="row mt-5">
       <div class="col-6">
           <div>
+            <a href="/bracket" class="col-3 btn btn-primary"> View Bracket</a>
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
               <ul class="col-6 justify-content-between mt-5">               
               <img class="img-fluid" src="<%= user.pic %>">
-              </ul>    
-                
-                <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+              </ul>                   
           </div>
+          <div> <form action="/login" method="POST"> </form></div>
+          
+
           <div class="mt-5">
             <h2>Update your avatar</h2>
-            <form 
-            action="/user/updateAvatar/<%= user.id %>?_method=PUT" 
-            enctype="multipart/form-data" 
-            method="POST">
-             <label for="imgUpload" class="form-label">Image</label>
-             <input type="file" class="form-control" id="imageUpload" name="file">        
+          
+            <form action="/user/updateAvatar?_method=PUT" method="POST" enctype="multipart/form-data">                 
+             <label for="updateAvatar" class="form-label">Image</label>
+             <input 
+             type="file" 
+             class="form-control" 
+             id="imageUpload" 
+             name="file">        
+             <button type="submit" class="btn btn-primary" value="Upload">Submit</button>    
             </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>    
+            </form>
+
+            <div class="mb-3">
+            <form action="/user/changeName" method="POST"> 
+            
+              <label for="changeUsername" class="form-label">Change Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="changeUsername"
+                name="changeUsername"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary" value="te">Submit</button>            
             </form>
           </div>
       </div>

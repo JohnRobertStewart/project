@@ -11,7 +11,7 @@ const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const userRoutes = require("./routes/user");
 const { options } = require("./routes/main");
-
+const path = require("path");
 
 //Connect To Database
 connectDB();
@@ -22,6 +22,7 @@ app.use(
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: true,
+    cookie: { maxAge: 360000 },
     store: MongoDBStore.create({ mongoUrl: process.env.DB_STRING, client: mongoose.connection.getClient() }),
   })
 );
@@ -33,16 +34,18 @@ require("dotenv").config({ path: "./config/.env" });
 // Passport config
 require("./config/passport")(passport);
 
-//Using EJS for views
-app.set("view engine", "ejs");
-
 //Static Folder
-const path = require("path");
-app.use(express.static(path.join(__dirname + "public")));
+//Using EJS for views
+app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, 'public')))
+
+
 
 //Body Parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 
 //Logging
 app.use(logger("dev"));
@@ -61,7 +64,7 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/", userRoutes);
-app.use("/user", userRoutes);
+app.use("/user/", userRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {
