@@ -12,7 +12,8 @@ module.exports =  {
 
   changeName: async  (req, res) => {
     try {
-      await User.findOneAndUpdate(loggedIn = true,        
+      await User.findOneAndUpdate(    
+        { _id: req.params.id },   
         {$set: {userName: req.body.changeUsername}},
         {new: true});
         res.redirect('/profile');
@@ -25,31 +26,27 @@ module.exports =  {
       res.status(500).send(err)
      }
   },
+  
 
   updateAvatar: async (req, res) => {
-    try {    
-      
-      await cloudinary.uploader.destroy(user.cloudinaryId.id);
-      // Upload image to cloudinary
-      let result;
-      if (req.file) {
-        result = await cloudinary.uploader.upload(req.file.path);
-      }
-      const data = {        
-        pic: result.secure_url || user.avatar,
-        cloudinaryId: result.public_id || user.pic,
-      };        
-     
-      user = await User.findByIdAndUpdate(req.params.id, data, { new: true });
-      res.redirect("/profile");      
+    try {         
+    const result = await cloudinary.uploader.upload(req.file.path);
+    await User.findOneAndUpdate(       
+        { _id: req.params.id},
+        {$set: {cloudinaryId: result.public_id}},
+        { overwrite: true }),          
+    await User.findOneAndUpdate(  
+        { _id: req.params.id},
+        {$set: {pic: result.secure_url}},
+        {new: true});               
+        res.redirect("/profile");      
     } catch (err) {
       console.log(req.body);
-     // console.log(result);
       res.redirect("/profile");
       console.error(err);
     }
   },
 };
 
-
+//invalidate parameter to true
 //cloudinary.uploader.upload(req.file.path, public_id: '/my_folder/my_public_id',  invalidate: true),

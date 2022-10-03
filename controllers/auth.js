@@ -8,8 +8,7 @@ const user = require("./user");
 exports.getLogin = (req, res) => {
   if (req.user) {
     user.loggedIn = true;   
-    return  res.redirect("/profile");
-    
+    return  res.redirect("/profile");   
   }
   res.render("login", {
   title: "Login",
@@ -43,7 +42,10 @@ exports.postLogin = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      user.loggedIn = true;
+    User.findOneAndUpdate(    
+        { _id: req.params.id },   
+        {$set: {loggedIn: true}},
+        {new: true});
       req.flash("success", { msg: "Success! You are logged in." });
       res.redirect(req.session.returnTo || "/profile");
     });
@@ -58,7 +60,10 @@ exports.logout = (req, res) => {
     if (err)
       console.log("Error : Failed to destroy the session during logout.", err);
     req.user = null;
-    user.loggedIn = false;
+    User.findOneAndUpdate(    
+      { _id: req.params.id },   
+      {$set: {loggedIn: false}},
+      {new: true});
     res.redirect("/");
   });
 };
