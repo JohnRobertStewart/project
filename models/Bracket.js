@@ -12,15 +12,16 @@ const BracketSchema = new mongoose.Schema({
 
 });
 
-  module.exports = mongoose.model("Bracket", BracketSchema);
 
  BracketSchema.pre("save", function save(next) { 
     try {
-   Bracket.find().select(p1).sort(rank).populate('User')
-  res.send(player)
+   Bracket.find({}).select(p1).sort(rank).populate('User')
+   res.send(p1)
 } catch (err) {
     console.log(err);
   }
  });
 
- 
+ module.exports = mongoose.model("Bracket", BracketSchema);
+
+

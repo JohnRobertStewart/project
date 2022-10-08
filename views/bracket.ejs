@@ -3,14 +3,14 @@
   <div class="row mt-5">
       <div class="col-6">
           <div>
-            <% for(var i=0; i < user.length; i++) {%>
+            <% for(var i=0; i < bracket.length; i++) {%>
             <li class="col-6 justify-content-between mt-5">
-            <%= user[i].userName %>
+            <%= bracket[i] %>
             <img class="img-fluid" src="<%= user[i].pic %>">  
             <% if (i.length = 1) {%> 
             <p> VS         
             <% } %> 
-          </p>
+            </p>
             </li>
             <% } %> 
           </div>         
