@@ -24,7 +24,7 @@
                     </div>
                     <div class="mb-3">
                       <label for="password" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="password" name="password">Password must be at least 8 characters long.
+                      <input type="password" class="form-control" id="password" name="password">Password must be at least 6 characters long.
                     </div>
                     <div class="mb-3">
                         <label for="confirmPassword" class="form-label">Confirm Password</label>
@@ -34,7 +34,13 @@
                         <label for="pic" class="form-label">You must upload a User Avatar, 256 x 256 plox</label>
                         <input type="file" class="form-control" id="imageUpload" name="file">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="mb-3">
+                        <label for="rank" class="form-label">What is your current rank?</label>
+                        <input type="rank" class="form-control" id="rank" name="rank">
+                        </div>
+                    
+                   <button type="submit" class="btn btn-primary mb-3">Submit</button>
+                </div>
                   </form>
             </section>
         </div>

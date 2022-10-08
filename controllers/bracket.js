@@ -1,11 +1,12 @@
+const Bracket = require("../models/Bracket");
 const User = require("../models/User");
 
 module.exports = {
 
 getBracket: async (req, res) => {
     try {
-    const user = await User.find();   
-    res.render("bracket.ejs", {user: user, userName: user.userName, userPic: user.pic})         
+    const bracket = new Bracket   
+    res.render("bracket.ejs")         
     console.log(req.sessionID);
     } catch (err) {
       console.log(err);

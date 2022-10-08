@@ -107,7 +107,7 @@ exports.postSignup = async (req, res, next) => {
     cloudinaryId: result.public_id,
     isAdmin: false,
     loggedIn: false,
-    
+    rank: req.body.rank,
   });
  
 
