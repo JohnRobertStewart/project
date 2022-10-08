@@ -9,7 +9,7 @@ const userController = require("../controllers/user");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 router.get("/", homeController.getIndex);
-router.get("/bracket", homeController.getBracket);
+//router.get("/bracket", homeController.getBracket);
 router.get("/login", authController.getLogin);
 router.post("/login", authController.postLogin);
 router.get("/logout", authController.logout);

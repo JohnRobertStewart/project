@@ -12,4 +12,6 @@ router.post("/user/changeName/:id", ensureAuth, userController.changeName);
 
 router.post("/user/updateAvatar/:id", ensureAuth, upload.single("file"), userController.updateAvatar);
 
+router.delete("/user/deleteAvatar/:id", ensureAuth, userController.deleteAvatar);
+
 module.exports = router;

@@ -1,3 +1,4 @@
+const User = require("../models/User");
 
 
 
@@ -7,11 +8,11 @@ module.exports = {
       res.render("index.ejs");
       console.log(req.sessionID);     
     },
-    getBracket: (req, res) => {
-      res.render("bracket.ejs");
-      console.log(req.sessionID);
-  }
-  };
+//    getBracket: (req, res) => {
+//      res.render("bracket.ejs");
+//      console.log(req.sessionID);
+ // }
+};
 
  
   

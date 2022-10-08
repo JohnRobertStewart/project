@@ -10,6 +10,7 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const userRoutes = require("./routes/user");
+const bracketRoutes = require("./routes/bracket");
 const { options } = require("./routes/main");
 const path = require("path");
 
@@ -64,7 +65,10 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/", userRoutes);
+app.use("/", bracketRoutes);
+
 app.use("/user/", userRoutes);
+app.use("/bracket/", bracketRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {

@@ -3,7 +3,12 @@
   <div class="row mt-5">
       <div class="col-6">
           <div>
-             
+            <% for(var i=0; i<user.length; i++) {%>
+            <li class="col-6 justify-content-between mt-5">
+            <%= user[i].userName %>
+             <img class="img-fluid" src="<%= user[i].pic %>">                 
+             </li>
+            <% } %> 
           </div>         
       </div>
      </div>

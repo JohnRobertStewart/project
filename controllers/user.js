@@ -3,7 +3,8 @@ const User = require("../models/User");
 
 module.exports =  {
   getProfile: async (req, res) => {
-    try {     
+    try {    
+      User.find({userName : req.user.userName, userPic : req.user.pic} ) 
       res.render("profile.ejs", {user: req.user, pic: req.user.pic});
     } catch (err) {
       console.log(err);
@@ -34,19 +35,43 @@ module.exports =  {
     await User.findOneAndUpdate(       
         { _id: req.params.id},
         {$set: {cloudinaryId: result.public_id}},
-        { overwrite: true }),          
+        { new: true }),  
+        res.deleteAvatar;
     await User.findOneAndUpdate(  
         { _id: req.params.id},
         {$set: {pic: result.secure_url}},
         {new: true});               
-        res.redirect("/profile");      
+        res.redirect("/profile");  
+        res.deleteAvatar;        
     } catch (err) {
       console.log(req.body);
       res.redirect("/profile");
       console.error(err);
     }
   },
+
+  deleteAvatar: async (req, res) => {
+    try {
+    
+      let post = await User.findById({ _id: req.params.id });
+      // Delete image from cloudinary
+      await cloudinary.uploader.destroy(post.cloudinaryId);
+      res.redirect("/profile");      
+  
+    
+    } catch (err) {
+      console.log(req.body);
+      res.redirect("/profile");
+      console.error(err);
+      }
+     },
+
 };
 
+
+
+  
+  
+//cloudinary.v2.uploader.rename(from_public_id, to_public_id, options).then(callback);
 //invalidate parameter to true
-//cloudinary.uploader.upload(req.file.path, public_id: '/my_folder/my_public_id',  invalidate: true),
+//cloudinary.uploader.upload(req.file.path, public_id: '/my_folder/my_public_id',  invalidate: true)
