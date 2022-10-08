@@ -66,7 +66,6 @@ app.use(flash());
 app.use("/", mainRoutes);
 app.use("/", userRoutes);
 app.use("/", bracketRoutes);
-
 app.use("/user/", userRoutes);
 app.use("/bracket/", bracketRoutes);
 
