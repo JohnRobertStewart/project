@@ -66,8 +66,8 @@ app.use(flash());
 app.use("/", mainRoutes);
 app.use("/", userRoutes);
 app.use("/", bracketRoutes);
-app.use("/user/", userRoutes);
-app.use("/bracket/", bracketRoutes);
+app.use("/user", userRoutes);
+app.use("/bracket", bracketRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {

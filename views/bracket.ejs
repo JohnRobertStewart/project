@@ -3,7 +3,8 @@
   <div class="row mt-5">
       <div class="col-6">
           <div>
-            <% for(var i=0; i < bracket.length; i++) {%>
+            <form action="/bracket/getBracket/<%=bracket._id%>" method="GET"> 
+            <%= bracket %>
             <li class="col-6 justify-content-between mt-5">
             <%= bracket[i] %>
             <img class="img-fluid" src="<%= user[i].pic %>">  

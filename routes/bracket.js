@@ -6,7 +6,7 @@ const userController = require("../controllers/user");
 const bracketController = require("../controllers/bracket");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
-
 router.get("/bracket", bracketController.getBracket);
+router.post("/bracket", bracketController.getBracket);
 
 module.exports = router;
