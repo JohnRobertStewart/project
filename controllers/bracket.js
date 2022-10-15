@@ -3,9 +3,18 @@ const User = require("../models/User");
 const { db } = require("../models/User");
 const user = require("../models/User").schema;
 
+let x = (User / 2);
+
 module.exports = {
 
+
+
 //TODO : Rename Bracket to Matches.
+
+//OK SO - write a function to determine the NUMBER OF USERS 
+//Then make a (for loop?) bracket for EACH 2 users
+// if there is one user left over then do ....
+
 
 // Create a bracket that is a collection of 2 users per match
 // so the bracket is a thing, therefor matches should be a thing?
