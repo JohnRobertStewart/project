@@ -19,9 +19,12 @@ const BracketSchema = new mongoose.Schema({
 BracketSchema.pre("save", function save(next) {
    const bracket =  BracketSchema.findOne({User: User.rank.sort}).populate('p1');
    bracket.p1;
-   
  });
 
+ BracketSchema.pre("save", function save(next) {
+   const bracket =  BracketSchema.findOne({User: User.rank.sort}).populate('p2');
+   bracket.p2;
+ });
  module.exports = mongoose.model("Bracket", BracketSchema);
 
 //Embedded documents maybe?

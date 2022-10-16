@@ -1,6 +1,7 @@
 const Bracket = require("../models/Bracket");
-const { db } = require("../models/User");
 const User = require("../models/User");
+const { db } = require("../models/User");
+const user = require("../models/User").schema;
 
 module.exports = {
 
@@ -13,14 +14,16 @@ module.exports = {
 // Create EMPTY bracket FIRST, THEN populate with players?
 
 getBracket: async (req, res) => {
-const bracket = new Bracket;
-try{ fillBracket;
-res.render("profile.ejs");
-} catch (err) {
-  console.log(err);
+  try {    
+    bracket = new Bracket;
+    User.find().populate("rank").sort("rank");
+    res.render("bracket.ejs");
+  } catch (err) {
+    console.log(err);
+  }
 },
-};
 
+}
 // Bracket.findOne({rank: -1})
 
 /*
