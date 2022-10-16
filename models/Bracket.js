@@ -6,8 +6,12 @@ const BracketSchema = new mongoose.Schema({
    match: {
     p1: [{body:String, type: mongoose.Schema.Types.ObjectId , 
         required: true, unique: true, ref: 'User' }], 
+    p1pic: [{body:String, type: mongoose.Schema.Types.ObjectId , 
+         required: true, unique: true, ref: 'User' }], 
     p2: [{body: String, type: mongoose.Schema.Types.ObjectId ,
          required: true, unique: true, ref: 'User' }],
+    p2pic: [{body: String, type: mongoose.Schema.Types.ObjectId ,
+            required: true, unique: true, ref: 'User' }],
     },
    winner: {type: String},
    vod: {type: String},
@@ -16,6 +20,7 @@ const BracketSchema = new mongoose.Schema({
 
 // Will this work? How to presave a the sorted users?
 // Its only finding one user?
+// do i pre save or just populate when its made ??
 BracketSchema.pre("save", function save(next) {
    const bracket =  BracketSchema.findOne({User: User.rank.sort}).populate('p1');
    bracket.p1;
