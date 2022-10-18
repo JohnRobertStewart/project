@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
   cloudinaryId: {type : String, require: true,},
   isAdmin:{ type: Boolean, require: true, default: false},
   loggedIn: {type: Boolean, require: true, default: false },
-  rank: {type: Number, require: true},
+  rank: {type: Number },
 });
 
 

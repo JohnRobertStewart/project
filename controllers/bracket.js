@@ -1,33 +1,29 @@
 const Bracket = require("../models/Bracket");
+const { db } = require("../models/User");
 const User = require("../models/User");
 
 module.exports = {
 
+//TODO : Rename Bracket to Matches.
+
+// Create a bracket that is a collection of 2 users per match
+// so the bracket is a thing, therefor matches should be a thing?
+// https://mongoosejs.com/docs/subdocs.html
+//create a subdocument of matches embedded inside brackets?
+// Create EMPTY bracket FIRST, THEN populate with players?
+
 getBracket: async (req, res) => {
-await    {
-  const bracket = new Bracket.create
-     await {const : pl1 == User.find({rank}).sort({ rank : -1})};
-   
-     await {const : pl2 = User.find({rank}).sort({ rank : -1})};
-      const bracket = new Bracket({
-        match: {
-          p1: pl1, 
-          p2: pl2,
-          },
-         winner: {type: String},
-         vod: {type: String},
-    });
-    res.render("bracket.ejs")         
-    console.log(req.sessionID);
-    } catch (err) {
-      console.log(err);
-    }
-  },
+const bracket = new Bracket;
+await fillBracket;
+
+} catch (err) {
+  console.log(err);
+}
 };
 
-Bracket.findOne({rank: -1})
+// Bracket.findOne({rank: -1})
 
-async function populateBracket(bracket) {
+async function fillBracket() {
   try{
   return User.find({rank}).sort
   ({ rank : -1}).exec(function(err, Bracket){ 
@@ -37,6 +33,13 @@ async function populateBracket(bracket) {
     }
   };
 
+  //sort the bracket and return it... update it?
+  function sortBracket(User, Bracket) {
+  db.Users.find    
+
+  }
+
+  //Embedded documents maybe?
 
 //model.find({ ... }).sort({ field : criteria}).exec(function(err, model){ ... });
 
