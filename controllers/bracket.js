@@ -14,15 +14,16 @@ module.exports = {
 
 getBracket: async (req, res) => {
 const bracket = new Bracket;
-await fillBracket;
-
+try{ fillBracket;
+res.render("profile.ejs");
 } catch (err) {
   console.log(err);
-}
+},
 };
 
 // Bracket.findOne({rank: -1})
 
+/*
 async function fillBracket() {
   try{
   return User.find({rank}).sort
@@ -36,8 +37,17 @@ async function fillBracket() {
   //sort the bracket and return it... update it?
   function sortBracket(User, Bracket) {
   db.Users.find    
-
+*/
+/*
   }
+const findRank = function(Users){
+let rank = Users[0],
+for (let i = 0; i < Users.length; i++){
+  if(Users[i] > Users[0])
+  Users.
+}
+}
+*/
 
   //Embedded documents maybe?
 
@@ -46,7 +56,7 @@ async function fillBracket() {
 //sort desc:{ user.rank: -1}
 
 /*
-BracketSchema.pre("save", function save(next) { 
+BracketSchema.pre("save", function save(next) 
    try {
   Bracket.find({}).select(p1,p2).sort(rank).populate('User')
   res.send(p1,p2)
