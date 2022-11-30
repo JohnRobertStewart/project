@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "tournament bracket for saiyan starcraft",
   "main": "server.js",
-  "builds": [
-    { "src": "server.js", "use": "@vercel/node" }
-  ],
   "routes": [
     { "src": "/(.*)", "dest": "/server.js" }
   ],
