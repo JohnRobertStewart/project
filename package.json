@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "description": "tournament bracket for saiyan starcraft",
   "main": "server.js",
+  "builds": [
+    { "src": "server.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/server.js" }
+  ],
   "scripts": {
     "start": "nodemon server.js",
-    "build": "react-scripts build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
