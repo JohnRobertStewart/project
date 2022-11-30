@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "tournament bracket for saiyan starcraft",
   "main": "server.js",
+  "routes": [{ "src": "/(.*)", "dest": "/server.js" }],
 
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+    
   },
   "dependencies": {
     "a": "^2.1.2",
