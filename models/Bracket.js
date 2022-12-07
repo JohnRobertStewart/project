@@ -5,33 +5,30 @@ const User = require("./User");
 const BracketSchema = new mongoose.Schema({
    match: {
     p1: [{body:String, type: mongoose.Schema.Types.ObjectId , 
-        required: true, unique: true, ref: 'User' }], 
-    p1pic: [{body:String, type: mongoose.Schema.Types.ObjectId , 
-         required: true, unique: true, ref: 'User' }], 
+        required: true, unique: true, ref: 'User',
+        p1pic: mongoose.Schema.Types.ObjectId, ref: 'pic' }], 
     p2: [{body: String, type: mongoose.Schema.Types.ObjectId ,
-         required: true, unique: true, ref: 'User' }],
-    p2pic: [{body: String, type: mongoose.Schema.Types.ObjectId ,
-            required: true, unique: true, ref: 'User' }],
+         required: true, unique: true, ref: 'User',
+         p2pic: mongoose.Schema.Types.ObjectId, ref: 'pic' }],
     },
    winner: {type: String},
    vod: {type: String},
 
 });
+module.exports = mongoose.model("Bracket", BracketSchema);
 
 // Will this work? How to presave a the sorted users?
 // Its only finding one user?
-// do i pre save or just populate when its made ??
+// do i pre save or just populate when its made ?? idk lol
+/*
 BracketSchema.pre("save", function save(next) {
-   const bracket =  BracketSchema.findOne({User: User.rank.sort}).populate('p1');
+   const bracket =  BracketSchema.findOne({User: User.rank.sort}).populate('p1', 'p2');
    bracket.p1;
- });
-
- BracketSchema.pre("save", function save(next) {
-   const bracket =  BracketSchema.findOne({User: User.rank.sort}).populate('p2');
    bracket.p2;
- });
+   next;
  module.exports = mongoose.model("Bracket", BracketSchema);
-
+});
+*/
 //Embedded documents maybe?
 
 /* From the internet : 

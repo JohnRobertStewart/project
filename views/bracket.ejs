@@ -1,19 +1,9 @@
 <%- include('partials/header') -%>
 <div class="container">
   <div class="row mt-5">
-      <div class="col-6">
+      <div class="col-6"> Hello
           <div>
-            <form action="/bracket/getBracket/<%=bracket._id%>" method="GET"> 
-            <%= bracket %>
-            <li class="col-6 justify-content-between mt-5">
-            <%= bracket[i] %>
-            <img class="img-fluid" src="<%= user[i].pic %>">  
-            <% if (i.length = 1) {%> 
-            <p> VS         
-            <% } %> 
-            </p>
-            </li>
-            <% } %> 
+            <div action="/bracket" method="POST"> 
           </div>         
       </div>
      </div>

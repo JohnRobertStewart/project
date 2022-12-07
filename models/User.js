@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
+const User = require("./User");
 const { none } = require("../middleware/multer");
 
 const UserSchema = new mongoose.Schema({
@@ -41,5 +42,6 @@ UserSchema.methods.comparePassword = function comparePassword(
     cb(err, isMatch);
   });
 };
+
 
 module.exports = mongoose.model("User", UserSchema);

@@ -1,10 +1,12 @@
 const cloudinary = require("../middleware/cloudinary");
+const { db } = require("../models/User");
 const User = require("../models/User");
 
 module.exports =  {
   getProfile: async (req, res) => {
     try {    
-      User.find({userName : req.user.userName, userPic : req.user.pic} ) 
+      User.find({userName : req.user.userName, userPic : req.user.pic})
+      .sort({rank: 1}); 
       res.render("profile.ejs", {user: req.user, pic: req.user.pic});
     } catch (err) {
       console.log(err);
@@ -51,14 +53,11 @@ module.exports =  {
   },
 
   deleteAvatar: async (req, res) => {
-    try {
-    
+    try { 
       let post = await User.findById({ _id: req.params.id });
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);
-      res.redirect("/profile");      
-  
-    
+      res.redirect("/profile");        
     } catch (err) {
       console.log(req.body);
       res.redirect("/profile");
@@ -66,11 +65,22 @@ module.exports =  {
       }
      },
 
+   sortUsers: async(req, res) => {
+      try {
+        await User.findAndUpdate(    
+        { _id: req.params.id},     
+        {$sort : {rank: 1}},
+        )        
+     } catch (err) {
+      console.log(err);
+      res.redirect("/profile");
+      console.error(err);
+      }
+     },
+     
 };
 
 
-
-  
   
 //cloudinary.v2.uploader.rename(from_public_id, to_public_id, options).then(callback);
 //invalidate parameter to true

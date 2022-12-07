@@ -1,38 +1,37 @@
 const Bracket = require("../models/Bracket");
 const User = require("../models/User");
 const { db } = require("../models/User");
-const user = require("../models/User").schema;
 
-let x = (User / 2);
+//TODO : 
+// OK -  Write a function to determine the NUMBER OF USERS 
+// SORT them and for every 2 USERS SORTED BY RANK
+// Create a BRACKET SCHEMEA
+// If there is one left over, leave ONE user blank or create a DEFAULT fill 
 
-module.exports = {
-
-
-
-//TODO : Rename Bracket to Matches.
-
-//OK SO - write a function to determine the NUMBER OF USERS 
-//Then make a (for loop?) bracket for EACH 2 users
-// if there is one user left over then do ....
-
-
-// Create a bracket that is a collection of 2 users per match
-// so the bracket is a thing, therefor matches should be a thing?
 // https://mongoosejs.com/docs/subdocs.html
 //create a subdocument of matches embedded inside brackets?
 // Create EMPTY bracket FIRST, THEN populate with players?
 
+
+//import {sortUsers} from './user'
+const {sortUsers} = require("./user")  
+module.exports = {
+  
 getBracket: async (req, res) => {
   try {    
-    bracket = new Bracket;
-    User.find().populate("rank").sort("rank");
+    const result = await User.find[{$sort : {rank : 1}}].populate('p1');
+    const bracket = new Bracket({ 
+        p1: result.body.userName,
+        p2: result.body.userName
+      })
+    await  
     res.render("bracket.ejs");
   } catch (err) {
     console.log(err);
   }
 },
-
 }
+
 // Bracket.findOne({rank: -1})
 
 /*

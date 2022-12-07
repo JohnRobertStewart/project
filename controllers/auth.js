@@ -6,6 +6,7 @@ const user = require("./user");
 
 
 exports.getLogin = (req, res) => {
+
   if (req.user) {
     user.loggedIn = true;   
     return  res.redirect("/profile");   
@@ -123,6 +124,9 @@ exports.postSignup = async (req, res, next) => {
         });
         return res.redirect("../signup");
       }
+//      User.aggregate(
+//       [{$sort : {rank : 1}}])
+      
       user.save((err) => {
         if (err) {
           return next(err);
@@ -136,6 +140,9 @@ exports.postSignup = async (req, res, next) => {
       });
     }
   );
+
+
+
 } catch (err) {
   console.log(err);
 }
