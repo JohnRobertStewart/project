@@ -10,7 +10,7 @@ router.get("/profile", ensureAuth, userController.getProfile);
 
 router.post("/user/changeName/:id", ensureAuth, userController.changeName);
 
-router.get("/user/sortUsers/:id", ensureAuth, userController.sortUsers);
+//router.get("/user/sortUsers/:id", ensureAuth, userController.sortUsers);
 
 router.post("/user/updateAvatar/:id", ensureAuth, upload.single("file"), userController.updateAvatar);
 

@@ -1,5 +1,6 @@
 const Bracket = require("../models/Bracket");
-const User = require("../models/User");
+const Users = require("../models/User");
+const mongoose = require("mongoose");
 const { db } = require("../models/User");
 
 //TODO : 
@@ -19,17 +20,48 @@ module.exports = {
   
 getBracket: async (req, res) => {
   try {    
-    const result = await User.find[{$sort : {rank : 1}}].populate('p1');
+
+    const sort = { rank: 1 }  
+    Users.find().sort(sort).toArray((err, ans,) => {
+        if (!err) {
+          return(Users);
+            console.log(ans);
+        }
+        else {
+          console.log(ans);
+        }
+    })
+
+    sortUsers: async (req, res) => {
+      try {
+       await req.Users[{$sort : {rank : 1}}];
+       res.return(Users); 
+       console.log("bee2");
+      } catch (err) {
+        console.log("bee");
+      }
+     },
+
+    function sortUsers(Users){
+    const p1 =  User.find[{$sort : {rank : 1}}].populate('p1');
+    const p2 =  User.find[{$sort : {rank : 1}}].populate('p2');
+
     const bracket = new Bracket({ 
-        p1: result.body.userName,
-        p2: result.body.userName
+     
+      p1: result.body.userName,
+      p2: result.body.userName,
       })
+      console.log("beet");
     await  
     res.render("bracket.ejs");
-  } catch (err) {
-    console.log(err);
+    res.send(p1)
+    res.send(p2)
   }
+} catch (err) {
+  console.log(err);
+}
 },
+
 }
 
 // Bracket.findOne({rank: -1})

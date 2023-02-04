@@ -64,11 +64,11 @@ module.exports =  {
       console.error(err);
       }
      },
-
+     /*
    sortUsers: async(req, res) => {
       try {
         await User.findAndUpdate(    
-        { _id: req.params.id},     
+        { _id: req.params.rank},     
         {$sort : {rank: 1}},
         )        
      } catch (err) {
@@ -76,8 +76,7 @@ module.exports =  {
       res.redirect("/profile");
       console.error(err);
       }
-     },
-     
+     },    */
 };
 
 
