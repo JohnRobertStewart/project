@@ -98,20 +98,6 @@ exports.postSignup = async (req, res, next) => {
     gmail_remove_dots: false,
   });
  
-    // Upload image to cloudinary
-  const result = await cloudinary.uploader.upload(req.file.path);
-  const user = new User({
-    userName: req.body.userName,
-    email: req.body.email,
-    password: req.body.password,
-    pic: result.secure_url,
-    cloudinaryId: result.public_id,
-    isAdmin: false,
-    loggedIn: false,
-    rank: req.body.rank,
-  });
- 
-
   User.findOne(
     { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
     (err, existingUser) => {
@@ -124,9 +110,7 @@ exports.postSignup = async (req, res, next) => {
         });
         return res.redirect("../signup");
       }
-//      User.aggregate(
-//       [{$sort : {rank : 1}}])
-      
+
       user.save((err) => {
         if (err) {
           return next(err);

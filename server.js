@@ -13,7 +13,7 @@ const userRoutes = require("./routes/user");
 const bracketRoutes = require("./routes/bracket");
 const { options } = require("./routes/main");
 const path = require("path");
-
+const port = process.env.PORT;
 //Connect To Database
 connectDB();
 
@@ -71,5 +71,5 @@ app.use("/bracket", bracketRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {
-  console.log("Server is running, you better catch it!");
+  console.log("Server is running, on PORT "  +port+ " you better catch it!");
 });

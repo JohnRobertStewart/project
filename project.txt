@@ -1,20 +1,8 @@
-# project
-So this is Project "PROJECT" it's a simple exploration and showcase MVP
-of my MERN stack - Plus, I have some collectables I'm selling
-and don't get me wrong I use and love ebay, as well as other services,
-buuuuuut it would be cooler to sell them in a more interesting way 
-while also incorporating that side of my life into the coding side. 
-
-Anyway - thanks for checking it out! Feel free to message me about ideas
-or code improvements or anything at all! I'm a pretty chill dude. 
-
-Cheers ! 
-
-TOP SECRET PLANS FOR SECRET PROJECT "PROJECT":
+	Happy funtime Plan for MERN Project "PROJECT" 
 
 [] Figure out what I want the site to do exactly
 
-[1/2] Create User accounts and Admin accounts
+[] Create User accounts and Admin accounts
    - User accounts mostly done
    - Create Admin accounts (privilages)
 [] Admins submit modules of Q and A, Users complete them
